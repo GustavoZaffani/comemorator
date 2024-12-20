@@ -1,39 +1,32 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+import { Stack } from "expo-router";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { StyleSheet } from "react-native";
+import { router } from "expo-router";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+  return <Stack>
+    <Stack.Screen name="index" options={{title: "Bem vindo"}}></Stack.Screen>
+    <Stack.Screen name="choose_target" options={{title: "Escolha o destinatário"}}></Stack.Screen>
+    <Stack.Screen name="choose_event" options={{title: "Escolha a comemoração"}}></Stack.Screen>
+    <Stack.Screen name="plus_information" options={{title: "Informe mais detalhes"}}></Stack.Screen>
+    <Stack.Screen name="result" options={{title: "Resultado", headerRight: headerRightResult}}></Stack.Screen>
+  </Stack>;
 }
+
+const headerRightResult = () => {
+  return (
+    <Ionicons
+        name="checkmark"
+        size={25}
+        color="black"
+        style={styles.headerRight}
+        onPress={() => router.dismissAll()}
+      />
+  )
+}
+
+const styles = StyleSheet.create({
+  headerRight: {
+    marginRight: 10
+  }
+})
