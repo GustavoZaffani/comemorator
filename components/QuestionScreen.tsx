@@ -1,5 +1,8 @@
+import { Colors } from "@/constants/Colors";
+import styles from "@/styles/base";
+import queryScreenStyles from "@/styles/query_screen";
 import { useState } from "react";
-import { Alert, Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { ImageSourcePropType } from "react-native";
 
 interface IQuestionScreen {
@@ -27,60 +30,22 @@ const QuestionScreen = (props: IQuestionScreen) => {
         <View style={styles.container}>
             <Image
                 source={imageSource}
-                style={styles.image} />
+                style={queryScreenStyles.image} />
 
-            <Text style={styles.question}>{question}</Text>
+            <Text style={queryScreenStyles.question}>{question}</Text>
 
             <TextInput
-                style={styles.input}
+                style={queryScreenStyles.input}
                 value={answerValue}
                 onChangeText={setAnswerValue}
-                placeholderTextColor="#b5b5b5"
+                placeholderTextColor={Colors.placeholder}
                 placeholder={placeholderQuestion} />
 
-            <TouchableOpacity style={styles.button} onPress={handleButtonClick}>
-                <Text>{labelButton}</Text>
+            <TouchableOpacity style={queryScreenStyles.button} onPress={handleButtonClick}>
+                <Text style={queryScreenStyles.buttonText}>{labelButton}</Text>
             </TouchableOpacity>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 20,
-        backgroundColor: "#fff",
-    },
-    image: {
-        width: 100,
-        height: 100,
-        marginBottom: 20,
-    },
-    question: {
-        fontSize: 18,
-        marginBottom: 10,
-        fontWeight: "bold",
-    },
-    input: {
-        width: "100%",
-        height: 40,
-        borderColor: "#ccc",
-        borderWidth: 1,
-        borderRadius: 5,
-        paddingLeft: 10,
-        marginBottom: 20,
-    },
-    button: {
-        flexDirection: "row",
-        alignItems: "center",
-        height: 40,
-        justifyContent: "center",
-        borderRadius: 5,
-        backgroundColor: "#efefef",
-        width: "100%"
-    }
-});
 
 export default QuestionScreen;

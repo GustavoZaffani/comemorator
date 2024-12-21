@@ -10,12 +10,11 @@ export default function PlusInformation() {
       params: { target, event, information: answer }
     })
   }
-    
-      return <QuestionScreen
-        question="Mais alguma informação importante?" 
-        placeholderQuestion="É meu melhor amigo... Conheço a 10 anos..."
-        labelButton="Gerar mensagem"
-        imageSource={require("../assets/images/info.png")}
-        handlePress={handlePress}/>;
 
+  return <QuestionScreen
+    question="Mais alguma informação importante?"
+    placeholderQuestion="É meu melhor amigo... Conheço a 10 anos..."
+    labelButton="Gerar mensagem"
+    imageSource={require("../assets/images/info.png")}
+    handlePress={handlePress} />;
 }
